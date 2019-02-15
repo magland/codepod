@@ -8,6 +8,9 @@ UID_=$3
 
 useradd -l -u $UID_ -G sudo -md /home/$USER_ -s /bin/bash -p $USER_ $USER_
 sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
+mv /venv /venv_hack
+mkdir /venv
+chown $USER_:$USER_ /venv
 
 ## IMPORTANT to put single quotes around EOL here so that the stuff does not get interpretted
 cat >/home/$USER_/.bashrc <<'EOL' 
@@ -35,6 +38,13 @@ if [ -d /home/user ]; then
 fi
 
 cd $PROJECT_DIRECTORY
+cp -r /venv_hack/* /venv/
+
+source /venv/bin/activate
+if [ -f "/theiapod_init" ]; then
+	echo "RUNNING python /theiapod_init"
+	python /theiapod_init
+fi
 
 if [ -f "/codepod_init" ]; then
 	echo "RUNNING python /codepod_init"

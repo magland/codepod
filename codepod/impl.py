@@ -8,7 +8,7 @@ import yaml
 
 src_dir=os.path.dirname(os.path.realpath(__file__))
 
-def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_directory=None,docker_opts=None,git_smart=False):
+def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_directory=None,docker_opts=None,git_smart=False,no_pull=False):
     if not docker_opts:
         docker_opts=''
     if docker_opts.startswith('"'):
@@ -73,10 +73,13 @@ def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_di
         else:
             raise Exception('volumes must be tuples.')
 
-    try:
-        _run_command_and_print_output('docker pull {image}'.format(image=image))
-    except:
-        print('WARNING: failed to pull docker image: {image}... proceeding without pulling...'.format(image=image))
+    if no_pull:
+        print('Not pulling docker image because no_pull was specified')
+    else:
+        try:
+            _run_command_and_print_output('docker pull {image}'.format(image=image))
+        except:
+            print('WARNING: failed to pull docker image: {image}... proceeding without pulling...'.format(image=image))
 
     cmd='docker run {opts} {docker_opts} {image} /home/project {user} {uid}'
     #cmd='docker run {opts} {image}'
