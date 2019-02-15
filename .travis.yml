@@ -8,10 +8,9 @@ install:
 - pip install pytest
 script: python -m pytest
 deploy:
-  matrix:
-  - provider: pypi
-    user: magland
-    on:
-      tags: true
+  provider: pypi
+  user: magland
+  on:
+    tags: true
   password:
     secure: i4kdR4lXBMbs96SLvir/X85rJjZspSIMAsrqK2XKGdOisZ0Ekm7SzDjTkRGF122bEfTDhecObUJYMu6SFM2OudYpUw13hZCCnYk/fHe0BazpV347cYz1u/IE+4Kysy4O0lImw/seKW8ujhOiGt/hmQdXp9GKRBNqvvSjOUe1Nx+5tUzn05DsXfP5wIPEC9HMeTw6ssv0rJiWS85JEW5dlHwbxtvKefYr736b1q+g+OipcFs2Td3nAcg1mYISOlLdyrt09W/BvrYuB4V1w5v8s9G+YkT8jNaCEdrDUo7seL7CZPhk+KHLZytqlGELnR/v33GJ3vPV0hR1NX+gYrm+qKTMqi7+TZ72WVvnSrSeDYBsR2vWp32ZlDP2obyt+/75D9emCoCpuO+W0WunjzO6Ak14boDGTcJrR/jPHMMHJGt0zwQr5UhgZRKhMztwJNxH6cjWbPKdcxfsM/RE1WEacEHVxBCqKQWXJEKt+BWNR3tD744CFHc9tlLzyxMn2/390tGmIMDubKA29QPGMdNhIH5NYnEixHeuP9y1Idml5tCC1bM5/7I7CY5od+ft3UsowjZx8x4yGVxPZhDI7rljvsG51Q99S9AZlzFkvl1J72a5WvWCWksNxmJdisNxZiSPMQRPnshpvI8woqo36usjpeTMnn9Vg/X9MR1SbyQdIPI=
