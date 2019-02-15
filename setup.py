@@ -4,7 +4,7 @@ pkg_name="codepod"
 
 setuptools.setup(
     name=pkg_name,
-    version="0.1.2",
+    version="0.1.3",
     author="Jeremy Magland",
     author_email="jmagland@flatironinstitute.org",
     description="Open code workspaces in docker for editing via containerized vscode",
