@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+
+import argparse
+import codepod as cp
+
+def main():
+  parser = argparse.ArgumentParser(description = 'Run codepod')
+  parser.add_argument('repository',help='The name of the repository',nargs='*')
+  parser.add_argument('--volume','-v',help='Directory to mount', action='append')
+  parser.add_argument('--image',help='The docker image to use',default=None)
+  parser.add_argument('--host_working_directory','-w',help='The working directory on the host to use',default=None)
+  parser.add_argument('--docker_opts',help='Additional options to send to docker',default=None)
+  parser.add_argument('--git-smart','-g',help='Mount the ~/.gitconfig and ~/.git-credential-cache if present',action='store_true')
+
+  args = parser.parse_args()
+
+  volumes=_get_volumes_from_arg_list(args.volume)
+
+  if args.repository:
+    args.repository=args.repository[0]
+
+  cp.codepod(
+    repository=args.repository,
+    image=args.image,
+    volumes=volumes,
+    host_working_directory=args.host_working_directory,
+    docker_opts=args.docker_opts,
+    git_smart=args.git_smart
+  )
+
+def _get_volumes_from_arg_list(A):
+  if not A:
+    return []
+  volumes=[]
+  for aa in A:
+    vals=aa.split(':')
+    if len(vals)==1:
+      volumes.append((vals[0],vals[0]))
+    elif len(vals)==2:
+      volumes.append((vals[0],vals[1]))
+    else:
+      raise Exception('Invalid volume')
+  return volumes
+
+if __name__== "__main__":
+  main()
