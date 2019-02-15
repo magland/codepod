@@ -6,12 +6,21 @@ Edit project workspaces in docker containers using vscode.
 
 * Install git, docker and python 3 (>=3.6).
 * Install pyyaml (pip install pyyaml)
-* Install codepod as follows
 
+## Installation
+
+### Install from this repository
 ```
 pip install git+https://github.com/magland/codepod
 # for subsequent updates:
 pip install --upgrade git+https://github.com/magland/codepod
+```
+
+### Install from PyPI
+```
+pip install codepod
+# for subsequent updates:
+pip install --upgrade codepod
 ```
 
 ## Basic usage
