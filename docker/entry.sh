@@ -41,7 +41,7 @@ cd $PROJECT_DIRECTORY
 cp -r /venv_hack/* /venv/
 
 source /venv/bin/activate
-PYTHONPATH=/usr/lib/python3/dist-packages
+export PYTHONPATH=/usr/lib/python3/dist-packages
 if [ -f "/theiapod_init" ]; then
 	echo "RUNNING python /theiapod_init"
 	python /theiapod_init
