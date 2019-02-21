@@ -28,6 +28,14 @@ RUN install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
 RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 RUN apt-get install -y apt-transport-https && apt-get update && apt-get install -y code
 
+# Node and Yarn
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get update && apt-get install -y nodejs
+RUN npm install -g yarn
+
+# nodemon
+RUN npm install -g nodemon
+
 RUN apt-get install sudo
 RUN pip install pyyaml
 
@@ -41,6 +49,9 @@ RUN pip install pyyaml
 RUN apt-get install -y python3-venv
 RUN python3 -m venv /venv && mv /venv /venv2 && ln -s /venv2 /venv 
 RUN . /venv/bin/activate && pip install pyyaml
+
+# Install python3-tk (for tkinter)
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-tk
 
 COPY entry.sh /entry.sh
 RUN chmod a+x /entry.sh

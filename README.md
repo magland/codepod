@@ -1,26 +1,27 @@
 # Codepod
 
-Edit project workspaces in docker containers using vscode.
+Open and/or develop project repositories in docker containers.
 
 ## Prerequisites
 
 * Install git, docker and python 3 (>=3.6).
 * Install pyyaml (pip install pyyaml)
 
-## Installation
+## Installation from PyPI
 
-### Install from this repository
-```
-pip install git+https://github.com/magland/codepod
-# for subsequent updates:
-pip install --upgrade git+https://github.com/magland/codepod
-```
-
-### Install from PyPI
 ```
 pip install codepod
 # for subsequent updates:
 pip install --upgrade codepod
+```
+
+### Install from this repository
+```
+# After cloning this repository
+cd codepod
+pip install .
+# for subsequent updates, pull changes, then:
+pip install --upgrade .
 ```
 
 ## Basic usage
@@ -37,18 +38,12 @@ git clone https://github.com/magland/codepod
 codepod -w $PWD/codepod
 ```
 
-Then point your browser to:
-
-```
-http://localhost:3000
-```
-
 This will create a container with the workspace mounted at `/home/project`, and place you within a bash shell in the terminal. The source files may be edited either inside the container or outside the container on the local (host) machine. Programs in the project should be executed inside the container, because that's where the development environment is set up.
 
 To launch vscode within the container, run:
 
 ```
-code
+code .
 ```
 
 A shortcut command (that automatically clones the repository into a temporary directory):
@@ -69,7 +64,7 @@ tasks:
 - command: ./init.sh
 ```
 
-If a custom image is used (optional), it should be based on one of the default codepod docker images. Right now, there is only one -- it is `magland/codepod` on dockerhub.
+If a custom image is used (optional), it should be based on one of the default codepod docker images. The default is `magland/codepod` on dockerhub.
 
 Upon startup of the codepod container, the task commands are run sequentially.
 
