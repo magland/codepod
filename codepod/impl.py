@@ -39,12 +39,12 @@ def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_di
 
     opts=[
         '-it',
-        '-v {src_dir}/codepod_init_in_container.py:/codepod_init',
-        '-v {host_working_directory}:/home/project',
+        '--mount type=bind,source={src_dir}/codepod_init_in_container.py,destination=/codepod_init,readonly',
+        '--mount type=bind,source={host_working_directory},destination=/home/project',
         '--network host',
         '--privileged',
         '-e DISPLAY=unix{}'.format(os.environ.get('DISPLAY','')),
-        '-v /tmp/.X11-unix:/tmp/.X11-unix'
+        '--mount type=bind,source=/tmp/.X11-unix,destination=/tmp/.X11-unix'
     ]
 
     # git configuration
@@ -58,18 +58,18 @@ def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_di
     path0=os.environ.get('HOME','')+'/.gitconfig'
     if os.path.exists(path0):
         print('Mounting '+path0)
-        opts.append('-v {}:{}'.format(path0,'/home/user/.gitconfig'))
+        opts.append('--mount type=bind,source={},destination={}'.format(path0,'/home/user/.gitconfig'))
     path0=os.environ.get('HOME','')+'/.git-credential-cache'
     if os.path.exists(path0):
         print('Mounting '+path0)
-        opts.append('-v {}:{}'.format(path0,'/home/user/.git-credential-cache'))
+        opts.append('--mount type=bind,source={},destination={}'.format(path0,'/home/user/.git-credential-cache'))
 
     if mount_tmp:
-        opts.append('-v /tmp:/tmp')
+        opts.append('--mount type=bind,source=/tmp,destination=/tmp')
 
     for vv in volumes:
         if type(vv)==tuple:
-            opts.append('-v {}:{}'.format(os.path.abspath(vv[0]),os.path.abspath(vv[1])))
+            opts.append('--mount type=bind,source={},destination={}'.format(os.path.abspath(vv[0]),os.path.abspath(vv[1])))
         else:
             raise Exception('volumes must be tuples.')
 
@@ -92,6 +92,7 @@ def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_di
     cmd=cmd.replace('{user}',os.environ['USER'])
     cmd=cmd.replace('{uid}',str(os.getuid()))
 
+    print('RUNNING: '+cmd)
     os.system(cmd)
     #_run_command_and_print_output(cmd)
 
