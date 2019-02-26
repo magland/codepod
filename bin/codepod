@@ -12,6 +12,7 @@ def main():
   parser.add_argument('--docker_opts',help='Additional options to send to docker',default=None)
   parser.add_argument('--git-smart','-g',help='Mount the ~/.gitconfig and ~/.git-credential-cache if present',action='store_true')
   parser.add_argument('--no-pull',help='Do not pull the docker image (use the local image)',action='store_true')
+  parser.add_argument('--command',help='Pass following command to docker. Container will not be opened interactively.', default=None)
 
   args = parser.parse_args()
 
@@ -27,7 +28,8 @@ def main():
     host_working_directory=args.host_working_directory,
     docker_opts=args.docker_opts,
     git_smart=args.git_smart,
-    no_pull=args.no_pull
+    no_pull=args.no_pull,
+    command=args.command
   )
 
 def _get_volumes_from_arg_list(A):

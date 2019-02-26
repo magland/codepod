@@ -8,7 +8,7 @@ import yaml
 
 src_dir=os.path.dirname(os.path.realpath(__file__))
 
-def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_directory=None,docker_opts=None,git_smart=False,no_pull=False):
+def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_directory=None,docker_opts=None,git_smart=False,no_pull=False,command=False):
     if not docker_opts:
         docker_opts=''
     if docker_opts.startswith('"'):
@@ -46,6 +46,10 @@ def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_di
         '-e DISPLAY=unix{}'.format(os.environ.get('DISPLAY','')),
         '--mount type=bind,source=/tmp/.X11-unix,destination=/tmp/.X11-unix'
     ]
+
+    if command is not None:
+        del opts[0]
+        opts.append('--entrypoint="' + command + '"')
 
     # git configuration
 #if [ -f "$HOME/.gitconfig" ]; then
