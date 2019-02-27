@@ -1,4 +1,5 @@
 # Codepod
+[![Build Status](https://travis-ci.org/magland/codepod.svg?branch=master)](https://travis-ci.org/magland/codepod)
 
 Open and/or develop project repositories in docker containers.
 
@@ -87,3 +88,5 @@ TODO: write this section
 ## Authors
 
 Jeremy Magland
+
+(Alex Morley)
