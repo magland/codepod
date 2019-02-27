@@ -30,11 +30,8 @@ def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_di
 
     print(':::::::::::::::::::::::config:',config)
     if image is None:
-        print(config)
-        print('image' in config)
         if 'image' in config:
             image=config['image']
-        print(image)
         
     if image is None:
         image='magland/codepod:latest'
