@@ -16,7 +16,8 @@ def main():
           shell_execute(task['command'])
   print('+++extra+',config)
   print(os.environ)
-  shell_execute(os.environ['EXTRA_CMD'])
+  if os.environ.get('EXTRA_CMD',None):
+    shell_execute(os.environ['EXTRA_CMD'])
 
 def _parse_yaml(fname):
   try:
