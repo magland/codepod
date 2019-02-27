@@ -51,11 +51,10 @@ if [ -f "/codepod_init" ]; then
 	echo "RUNNING python /codepod_init"
 	python /codepod_init
 fi
-/venv/bin/pytest
 /bin/bash
 EOL
 
 chmod a+x /the_script.sh
 
 cd /home/$USER_
-sudo -u $USER_ bash -c "PROJECT_DIRECTORY=$PROJECT_DIRECTORY USER_=$USER_ /the_script.sh"
+sudo -u $USER_ bash -c "EXTRA_CMD=$EXTRA_CMD PROJECT_DIRECTORY=$PROJECT_DIRECTORY USER_=$USER_ /the_script.sh"

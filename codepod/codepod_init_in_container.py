@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-
 import yaml
 import subprocess
 import os
 
 def main():
-
   config=None  
   if os.path.exists('.codepod.yml'):
     config=_parse_yaml('.codepod.yml')
@@ -16,6 +14,9 @@ def main():
       for task in config['tasks']:
         if 'command' in task:
           shell_execute(task['command'])
+  print('+++extra+',config)
+  print(os.environ)
+  shell_execute(os.environ['EXTRA_CMD'])
 
 def _parse_yaml(fname):
   try:
