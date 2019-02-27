@@ -25,6 +25,7 @@ def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_di
 
     config={}
     if os.path.exists(host_working_directory+'/.codepod.yml'):
+        print(host_working_directory+'/.codepod.yml')
         config=_parse_yaml(host_working_directory+'/.codepod.yml')
 
     print(':::::::::::::::::::::::config:',config)
@@ -49,7 +50,7 @@ def codepod(*,repository='',image=None,volumes=[],mount_tmp=True,host_working_di
 
     if command is not None:
         del opts[0]
-        opts.append('--entrypoint="' + command + '"')
+        config['tasks'].append({'command':command})
 
     # git configuration
 #if [ -f "$HOME/.gitconfig" ]; then
