@@ -50,7 +50,7 @@ code .
 A shortcut command (that automatically clones the repository into a temporary directory):
 
 ```
-codepod https://github.com/magland/codepod
+codepod --repository https://github.com/magland/codepod
 ```
 
 ## Configuring the codepod environment for your project
