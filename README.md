@@ -30,7 +30,7 @@ pip install --upgrade .
 ```
 codepod [workspace directory] <options>
 <or>
-codepod -r [repository url] <options>
+codepod --repository [repository url] <options>
 ```
 
 For example, to open the codepod project itself:
@@ -87,6 +87,4 @@ TODO: write this section
 
 ## Authors
 
-Jeremy Magland
-
-(Alex Morley)
+Jeremy Magland and Alex Morley
