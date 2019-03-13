@@ -28,15 +28,15 @@ pip install --upgrade .
 ## Basic usage
 
 ```
-codepod [repository_name] <options>
+codepod [workspace directory] <options>
 <or>
-codepod -w [workspace directory] <options>
+codepod -r [repository url] <options>
 ```
 
 For example, to open the codepod project itself:
 ```
 git clone https://github.com/magland/codepod
-codepod -w $PWD/codepod
+codepod $PWD/codepod
 ```
 
 This will create a container with the workspace mounted at `/home/project`, and place you within a bash shell in the terminal. The source files may be edited either inside the container or outside the container on the local (host) machine. Programs in the project should be executed inside the container, because that's where the development environment is set up.
@@ -74,7 +74,7 @@ Upon startup of the codepod container, the task commands are run sequentially.
 Mounting volumes is docker style using the `-v` option. For example:
 
 ```
-codepod -w [workspace] -v /disk1/data:/data
+codepod [workspace] -v /disk1/data:/data
 ```
 
 ## Using a custom docker image for the environment
