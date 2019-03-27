@@ -1,7 +1,7 @@
 # Codepod
 [![Build Status](https://travis-ci.org/magland/codepod.svg?branch=master)](https://travis-ci.org/magland/codepod)
 
-Open and/or develop project repositories in docker containers.
+Open and/or develop project repositories in docker containers. Edit using VSCode & persist changes to disk by mounting local .git repositories.
 
 ## Prerequisites
 
